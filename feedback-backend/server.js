@@ -24,7 +24,7 @@ app.use(express.json()); // Parse incoming JSON requests
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.MONGO_URI) // Removed deprecated options
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => {
     console.error("MongoDB Connection Error:", err);
@@ -53,4 +53,12 @@ app.use((err, req, res, next) => {
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error(`Failed to start server: ${err.message}`);
+    process.exit(1); // Exit if server fails to start
+  } else {
+    console.log(`Server running on port ${PORT}`);
+  }
+});
