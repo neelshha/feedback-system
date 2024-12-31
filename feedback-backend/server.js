@@ -15,7 +15,7 @@ const app = express();
 // Middleware
 app.use(morgan("dev")); // Log requests for easier debugging
 app.use(cors({
-  origin: "http://localhost:3000", // Allow requests from your frontend URL
+  origin: "http://localhost:5137", // Allow requests from your frontend URL
   methods: ["GET", "POST", "PUT", "DELETE"], // Restrict allowed HTTP methods
   credentials: true, // Allow cookies or credentials to be sent
 }));
